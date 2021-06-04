@@ -54,7 +54,28 @@ void inverse_fft_radix2(std::valarray<Complex> &x) {
 void fft_image(std::valarray<Complex> &x, int width, int height) {
     // TODO: FIX!
 
-    for (size_t i = 0; i < height; i++) {
+    // std::valarray<Complex> res(height*width);
+
+    // // for (int i = 0; i < height; i ++) {
+    // //     for (int j = 0; j < width; j++) {
+    // //         Complex z = 0;
+    // //         for (int m = 0; m < height; m ++) {
+    // //             for (int n = 0; n < width; n++) {
+    // //                 z += x[i*width + j]*std::polar(1.0, -2 * PI * (i*m/height * j*n/width));
+    // //             }
+    // //         }
+    // //         z *= 1/(height*width);
+    // //         res[i*width + j] = z;
+    // //     }
+    // // }
+
+    // for (size_t k = 0; k < res.size(); k++)
+    // {
+    //     x[k] = res[k];
+    // }
+    
+
+    for (int i = 0; i < height; i++) {
         std::valarray<Complex> sliced = x[std::slice(i*width,width,1)];
         fft_radix2(sliced);
         for (size_t k = 0; k < sliced.size(); k++) {
@@ -62,7 +83,7 @@ void fft_image(std::valarray<Complex> &x, int width, int height) {
         }
     }
 
-    for (size_t j = 0; j < width; j++) {
+    for (int j = 0; j < width; j++) {
         std::valarray<Complex> sliced = x[std::slice(j,height,width)];
         fft_radix2(sliced);
         for (size_t k = 0; k < sliced.size(); k++)
@@ -70,32 +91,27 @@ void fft_image(std::valarray<Complex> &x, int width, int height) {
             x[j+k*width] = sliced[k];
         }
     }
-
-    for (size_t i = 0; i < 10; i++)
-    {
-        std::cout << x[i] << std::endl;
-    }
 }
 
 void inverse_fft_image(std::valarray<Complex> &x, int width, int height) {
     // TODO: FIX!
 
-    // for (size_t j = 0; j < width; j++) {
-    //     std::valarray<Complex> sliced = x[std::slice(j,height,width)];
-    //     inverse_fft_radix2(sliced);
-    //     for (size_t k = 0; k < sliced.size(); k++)
-    //     {
-    //         x[j+k*width] = sliced[k];
-    //     }
-    // }
+    for (int j = 0; j < width; j++) {
+        std::valarray<Complex> sliced = x[std::slice(j,height,width)];
+        inverse_fft_radix2(sliced);
+        for (size_t k = 0; k < sliced.size(); k++)
+        {
+            x[j+k*width] = sliced[k];
+        }
+    }
 
-    // for (size_t i = 0; i < height/2; i++) {
-    //     std::valarray<Complex> sliced = x[std::slice(i*width,width,1)];
-    //     inverse_fft_radix2(sliced);
-    //     for (size_t k = 0; k < sliced.size(); k++) {
-    //         x[i*width+k] = sliced[k];
-    //     }
-    // }
+    for (int i = 0; i < height; i++) {
+        std::valarray<Complex> sliced = x[std::slice(i*width,width,1)];
+        inverse_fft_radix2(sliced);
+        for (size_t k = 0; k < sliced.size(); k++) {
+            x[i*width+k] = sliced[k];
+        }
+    }
 }
 
 // COMPRESSION -----------------------------------------------------------------
@@ -104,7 +120,7 @@ void compress(std::valarray<Complex> &x) {
     // TODO: FIX!
     for (size_t k = 0; k < x.size(); k++) {
         // std::cout << x[k] << " ABS: " << abs(x[k]) << std::endl;
-        if (abs(x[k]) < 100000) {
+        if (abs(x[k]) < 10000) {
             x[k] = 0;
         }
     }
@@ -154,7 +170,7 @@ void write_img(std::valarray<Complex> &img_data, int width, int height) {
     size_t out_img_size = width*height;
     uint8_t out_img[out_img_size];
     for (size_t k = 0; k < out_img_size; k++) {
-        out_img[k] = (uint8_t)std::round(img_data[k].real());
+        out_img[k] = (uint8_t) std::round(img_data[k].real()); //! SOMETHING WRONG HERE
     }
     stbi_write_png("output.png", width, height, 1, out_img, width);
 
@@ -164,7 +180,7 @@ void write_img(std::valarray<Complex> &img_data, int width, int height) {
 
 int main(int argc, char const *argv[]) {
 
-    if (argc =! 2) {
+    if (argc != 2) {
         std::cout << "Please provide one input image filename." << std::endl;
         exit(1);
     }
@@ -183,8 +199,8 @@ int main(int argc, char const *argv[]) {
     std::cout << "FFT Image Duration: " <<
         time_it(fft_image, *img_data, width, height) << "s" << std::endl;
 
-    // std::cout << "Compression Duration:" <<
-    //     time_it(compress, *img_data) << "s" << std::endl;
+    std::cout << "Compression Duration:" <<
+        time_it(compress, *img_data) << "s" << std::endl;
 
     std::cout << "Inverse FFT Image Duration: " <<
         time_it(inverse_fft_image, *img_data, width, height) << "s" << std::endl;
