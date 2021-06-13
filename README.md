@@ -2,11 +2,9 @@
 Sequential and parallel fast Fourier transform algorithms for image compression.
 
 ## Introduction
-<p align="justify">
-A fast Fourier transform algorithm quickly computes the discrete Fourier transform (DFT) of a sequence, or its inverse (IDFT). Fourier analysis converts a signal from its original domain (often time or space) to a representation in the frequency domain and vice versa. The DFT is obtained by decomposing a sequence of values into components of different frequencies.
+<p align="justify"> A fast Fourier transform algorithm quickly computes the discrete Fourier transform (DFT) of a sequence, or its inverse (IDFT). Fourier analysis converts a signal from its original domain (often time or space) to a representation in the frequency domain and vice versa. The DFT is obtained by decomposing a sequence of values into components of different frequencies. </p>
 
-This project focuses on the application of fast Fourier transforms for image compression. A Fourier transform allows deconstructs an image to its frequncy domain. In this domain, one can remove insignificant frequncies, essentially stripping data from the image. One can then reconstruct the image with less frequncies to obtain a "compressed" image. For the sake of simplicity, image width and height are constrained to be a power of two and all images are greyscaled before fourier transform computations.
-</p>
+<p align="justify"> This project focuses on the application of fast Fourier transforms for image compression. A Fourier transform allows deconstructs an image to its frequncy domain. In this domain, one can remove insignificant frequncies, essentially stripping data from the image. One can then reconstruct the image with less frequncies to obtain a "compressed" image. For the sake of simplicity, image width and height are constrained to be a power of two and all images are greyscaled before fourier transform computations. </p>
 
 In this project, four types algorithms were implemented and their execution times were analyzed based on the number of threads:
 1. Serial 2D FFT w/ Serial 1D FFT
