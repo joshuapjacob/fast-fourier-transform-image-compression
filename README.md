@@ -18,7 +18,7 @@ Note: **The program does not actually output a compressed jpeg image.** It only 
 ### images/grig.jpg (512x1024)
 Input | 10% | 2% | 1%
 :----:|:---:|:--:|:--:
-![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/grig.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.1.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.02.png) | [](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.01.png)
+![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/grig.jpg) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.1.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.02.png) | [](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.01.png)
 
 Notice the loss of detail, particularly in the girl's eyebrows, and the man's earring disapearing at higher rates of compression.
 
