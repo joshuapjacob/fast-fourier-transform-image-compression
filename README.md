@@ -12,7 +12,7 @@ In this project, four types algorithms were implemented and their execution time
 3. Serial 2D FFT w/ Parallel 1D FFT
 4. Parallel 2D FFT w/ Parallel 1D FFT
 
-**The program does not actually output a compressed jpeg image.** It only shows what a compressed image would look like since the ouput is always simply written to a png.
+Note: **The program does not actually output a compressed jpeg image.** It only shows what a compressed image would look like since the ouput is always simply written to a png.
 
 ## Examples
 ### `images/grig.jpg` (512x1024)
