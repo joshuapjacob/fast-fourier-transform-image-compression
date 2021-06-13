@@ -18,21 +18,21 @@ Note: **The program does not actually output a compressed jpeg image.** It only 
 ### images/grig.jpg (512x1024)
 Input | 10% | 2% | 1%
 :---:|:---:|:---:|:---:|
-![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/grig.jpg) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.1.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.02.png) | yo[why](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.01.png) |
+![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/grig.jpg) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.1.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.02.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/grig_0.01.png) |
 
 Notice the loss of detail, particularly in the girl's eyebrows, and the man's earring disapearing at higher rates of compression.
 
 ### images/graphics.jpg (512x512)
 Input | 10% | 5% | 1%
 :----:|:---:|:---:|:---:|
-![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/graphics.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/graphics_0.1.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/graphics_0.05.png) | [](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/graphics_0.01.png) |
+![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/graphics.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/graphics_0.1.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/graphics_0.05.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/graphics_0.01.png) |
 
 Compression at lower rates removes the noise from this image (which is a render from [my ray tracer](https://github.com/joshuapjacob/computer-graphics))
 
 ### `images/philip.jpg` (2048x2048)
 Input | 1% | 0.2% | 0.1%
 :---:|:---:|:---:|:---:|
-![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/philip.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/philip_0.01.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/philip_0.002.png) | [](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/philip_0.001.png) |
+![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/philip.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/philip_0.01.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/philip_0.002.png) | ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/compressed/philip_0.001.png) |
 
 Notice the loss of detail, particularly in the hair.
 ## Implementation Details
