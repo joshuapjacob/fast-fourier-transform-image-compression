@@ -1,4 +1,4 @@
-# fast-fourier-transform-image-compression
+# Fast Fourier Transform Image Compression
 Sequential and parallel fast Fourier transform algorithms for image compression.
 
 ## Introduction
