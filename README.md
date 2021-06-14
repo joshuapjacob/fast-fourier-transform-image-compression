@@ -1,6 +1,25 @@
 # Fast Fourier Transform Image Compression
 Sequential and parallel fast Fourier transform algorithms for image compression.
 
+- [Fast Fourier Transform Image Compression](#fast-fourier-transform-image-compression)
+  * [Introduction](#introduction)
+  * [Examples](#examples)
+    + [`images/grig.jpg` (512x1024)](#-images-grigjpg---512x1024-)
+    + [`images/graphics.jpg` (512x512)](#-images-graphicsjpg---512x512-)
+    + [`images/philip.jpg` (2048x2048)](#-images-philipjpg---2048x2048-)
+  * [Implementation Details](#implementation-details)
+    + [Serial 1D FFT](#serial-1d-fft)
+    + [Parallel 1D FFT](#parallel-1d-fft)
+    + [Serial 2D FFT](#serial-2d-fft)
+    + [Parallel 2D FFT](#parallel-2d-fft)
+    + [Compression](#compression)
+  * [Compilation & Execution](#compilation---execution)
+    + [Requirements](#requirements)
+    + [Example Usage](#example-usage)
+  * [Analysis](#analysis)
+  * [Conclusion](#conclusion)
+  * [References](#references)
+
 ## Introduction
 <p align="justify"> A fast Fourier transform algorithm quickly computes the discrete Fourier transform (DFT) of a sequence, or its inverse (IDFT). Fourier analysis converts a signal from its original domain (often time or space) to a representation in the frequency domain and vice versa. The DFT is obtained by decomposing a sequence of values into components of different frequencies. </p>
 
