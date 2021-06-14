@@ -59,9 +59,10 @@ The output images are stored as `output1.png`, `output2.png`, `output3.png`, and
 ## Analysis
 
 Analysis of excution time was only performed for the largest image (`images/philip.png` 2048x2048). All tests were run on a machine with an eight core processor. Execution time is not the complete program execution time but only the execution time of the fourier transform function and its inverse.
+  
+![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/plots/execution_time.png)
 
-- Plot time vs. threads
-- Plot speed-up vs. threads
+![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/plots/speed_up.png)
 ## Conclusion
 
 - It works? but not properlly parallelized.
