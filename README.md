@@ -49,12 +49,16 @@ TODO: Perform  a  detailed  comparison  of  the  resulting  algorithms.
 - [stb](https://github.com/nothings/stb) (to read/write images)
 - [tbb](https://github.com/oneapi-src/oneTBB) (high level abstract threading for `std::sort`)
 
-Usage: ./main.out <image filename> <fraction of data to keep>
 ```
 $ g++ -O3 main.cpp -D_GLIBCXX_PARALLEL -fopenmp -ltbb -std=c++17 -o main.out
-$ ./main.out images/philip.png 0.05 # keeps only 5% of the data in philip.png
+$ ./main.out <image filename> <fraction of data to keep>
 ```
 The output images are stored as `output1.png`, `output2.png`, `output3.png`, and `output4.png`. All outputs are essentially the same apart from minuscule differences caused by numerial precision differences of the fast Fourier transform algorithms.
+
+### Example
+```
+$ ./main.out images/philip.png 0.05 # keeps only 5% of the data in philip.png
+```
 
 ## Analysis
 
@@ -63,6 +67,9 @@ Analysis of excution time was only performed for the largest image (`images/phil
 ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/plots/execution_time.png)
 
 ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/plots/speed_up.png)
+
+The fully sequential algorithm (Serial 2D FFT w/ Serial 1D FFT) is independant of the number of threads as expected. The fully parallel algorithm (Parallel 2D FFT w/ Parallel 1D FFT) offers the best speed-up with a high number of threads. However, parallelizing only the 2D FFT (Parallel 2D FFT w/ Serial 1D) seems to offer a better speed-up when the number of threads is below 12. The worst algorithm involves parallelizing only the 1D FFT (Serial 2D FFT w/ Parallel 1D FFT). It does not offer a significant speed-up when the number of threads is over 3. In fact, it seems to progressivly get worse when the number of threads is increased. This might be due to thread spawning overhead costs becoming significant or I just have a bug in my code.
+
 ## Conclusion
 
 - It works? but not properlly parallelized.
