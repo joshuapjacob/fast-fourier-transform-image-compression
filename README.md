@@ -37,12 +37,22 @@ Input | 1% | 0.2% | 0.1%
 Notice the loss of detail, particularly in the hair.
 ## Implementation Details
 
-TODO: Perform  a  detailed  comparison  of  the  resulting  algorithms.
+All algorithms modify the data in-place.
 
 ### Serial 1D FFT
+This is the standard Cooley-Tukey Radix-2 decimination-in-frequncy algorithm. This is a divide-and-conquer algorithm that recursively divides the transform into two pieces of size N/2 at each step, and is therefore limited to power-of-two sizes.
+
 ### Parallel 1D FFT
+This is an optimized Cooley-Tukey FFT decimation-in-time algorithm that uses bit-reversal and a table for the exponentiation. Unfortunatly, the parallelization of my implementation here is quite limited and only involves breaking down loops over data into blocks for each thread.
+
 ### Serial 2D FFT
+This is the standard sequantial 2D FFT that invloves perfoming a 1D FFT on each row of the image data matrix and then on each column of the resuling matrix.
+
 ### Parallel 2D FFT
+This is a 2D FFT that makes each thread perform a 1D FFT on each row of a block of rows of the image data matrix. Then, after syncronization, each thread performs a 1D FFT on each column of a of the resulting matrix. When used with the parallel 1D FFT, the 1D FFT computations only use 2 threads. For example, if the this algorithm is used with 8 threads, the 2D computations are only done using 4 threads and since each 2D computation thread requires doing 1D computation, each of the 4 threads will only spawn 2 threads, making the total number of threads to be 8.
+
+### Compression
+After a fourier transform is done, the frequncies are sorted and only a certain fraction of frequncies are kept, the rest of the data in the matrix is set to 0. Finding exactly which data to keep is the often very slow with large data matrices. I'm aware that such precision is usually not neccesary and a randoming sampling to approximated the distribution of the frequncies and then choosing a cut-off would have been much more faster than finding the exact cut-off.
 
 ## Compilation & Execution
 ### Requirements
@@ -55,7 +65,7 @@ $ ./main.out <image filename> <fraction of data to keep>
 ```
 The output images are stored as `output1.png`, `output2.png`, `output3.png`, and `output4.png`. All outputs are essentially the same apart from minuscule differences caused by numerial precision differences of the fast Fourier transform algorithms.
 
-### Example
+### Example Usage
 ```
 $ ./main.out images/philip.png 0.05 # keeps only 5% of the data in philip.png
 ```
@@ -68,12 +78,12 @@ Analysis of excution time was only performed for the largest image (`images/phil
 
 ![](https://raw.githubusercontent.com/joshuapjacob/fast-fourier-transform-image-compression/main/images/plots/speed_up.png)
 
-The fully sequential algorithm (Serial 2D FFT w/ Serial 1D FFT) is independant of the number of threads as expected. The fully parallel algorithm (Parallel 2D FFT w/ Parallel 1D FFT) offers the best speed-up with a high number of threads. However, parallelizing only the 2D FFT (Parallel 2D FFT w/ Serial 1D) seems to offer a better speed-up when the number of threads is below 12. The worst algorithm involves parallelizing only the 1D FFT (Serial 2D FFT w/ Parallel 1D FFT). It does not offer a significant speed-up when the number of threads is over 3. In fact, it seems to progressivly get worse when the number of threads is increased. This might be due to thread spawning overhead costs becoming significant or I just have a bug in my code.
+The fully sequential algorithm (Serial 2D FFT w/ Serial 1D FFT) is independant of the number of threads as expected. The fully parallel algorithm (Parallel 2D FFT w/ Parallel 1D FFT) offers the best speed-up with a high number of threads. However, parallelizing only the 2D FFT (Parallel 2D FFT w/ Serial 1D) seems to offer a better speed-up when the number of threads is below 12. The worst algorithm involves parallelizing only the 1D FFT (Serial 2D FFT w/ Parallel 1D FFT). It does not offer as significant of a speed-up when the number of threads is over 3. In fact, it seems to progressivly get worse when the number of threads is increased. This might be due to thread-spawning overhead becoming significant or I just have a bug in my code :confused: .
 
 ## Conclusion
 
-- It works? but not properlly parallelized.
+The overall image compression of all the algorithms implemented is successful. We observe that more information is lost when we increasing the compression rate. The best algorithm is the fully parallel implementation (Parallel 2D FFT w/ Parallel 1D FFT) as it offers the best speed-up with a higher number of threads. The worst algorithm seems to be the one which parallelizes only the 1D FFT (Serial 2D FFT w/ Parallel 1D FFT) since the speed-up seems to decrease when the number of threads is high.
 
 ## References
-- [Image Compression and the FFT](https://www.youtube.com/watch?v=gGEBUdM0PVc)
-- [Image Compression and the FFT (Examples in Python)](https://www.youtube.com/watch?v=uB3v6n8t2dQ)
+- [Steve Brunton - Image Compression and the FFT](https://www.youtube.com/watch?v=gGEBUdM0PVc)
+- [Steve Brunton - Image Compression and the FFT (Examples in Python)](https://www.youtube.com/watch?v=uB3v6n8t2dQ)
