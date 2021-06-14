@@ -4,9 +4,9 @@ Sequential and parallel fast Fourier transform algorithms for image compression.
 - [Fast Fourier Transform Image Compression](#fast-fourier-transform-image-compression)
   * [Introduction](#introduction)
   * [Examples](#examples)
-    + [`images/grig.jpg` (512x1024)](#-images-grigjpg---512x1024-)
-    + [`images/graphics.jpg` (512x512)](#-images-graphicsjpg---512x512-)
-    + [`images/philip.jpg` (2048x2048)](#-images-philipjpg---2048x2048-)
+    + [`images/grig.jpg` (512x1024)](#images-grigjpg---512x1024-)
+    + [`images/graphics.jpg` (512x512)](#images-graphicsjpg---512x512-)
+    + [`images/philip.jpg` (2048x2048)](#images-philipjpg---2048x2048-)
   * [Implementation Details](#implementation-details)
     + [Serial 1D FFT](#serial-1d-fft)
     + [Parallel 1D FFT](#parallel-1d-fft)
@@ -101,7 +101,7 @@ The fully sequential algorithm (Serial 2D FFT w/ Serial 1D FFT) is independant o
 
 ## Conclusion
 
-The overall image compression of all the algorithms implemented is successful. We observe that more information is lost when we increasing the compression rate. The best algorithm is the fully parallel implementation (Parallel 2D FFT w/ Parallel 1D FFT) as it offers the best speed-up with a higher number of threads. The worst algorithm seems to be the one which parallelizes only the 1D FFT (Serial 2D FFT w/ Parallel 1D FFT) since the speed-up seems to decrease when the number of threads is high.
+The overall image compression of all the algorithms implemented is successful. We observe that more information is lost when we increase the compression rate. The best algorithm is the fully parallel implementation (Parallel 2D FFT w/ Parallel 1D FFT) as it offers the best speed-up with a higher number of threads. The worst algorithm seems to be the one which parallelizes only the 1D FFT (Serial 2D FFT w/ Parallel 1D FFT) since the speed-up seems to decrease when the number of threads is high.
 
 ## References
 - [Steve Brunton - Image Compression and the FFT](https://www.youtube.com/watch?v=gGEBUdM0PVc)
